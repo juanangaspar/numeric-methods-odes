@@ -102,7 +102,7 @@ def adams_moulton3(a,b,fun,N,y0):
                 break
             z_0 = z_sig
         else:
-            print('El algoritmo del punto fijo no converge')
+            print('The fixed-point algorithm does not converge')
         
         y[k+1] = z_sig
         f[k+1] = fun(t[k+1],y[k+1])
@@ -138,16 +138,16 @@ def experimento_mallado_fijo40():
     error_ab3 = max(abs(y_ab3-y_exacta))
     error_am3 = max(abs(y_am3-y_exacta))
     
-    print('Los errores para N=40 son:')
-    print('Error en AB2:', error_ab2)
-    print('Error en AB3:', error_ab3)
-    print('Error en AM3:', error_am3)
+    print('The errors for N=40 are:')
+    print('Error in AB2:', error_ab2)
+    print('Error in AB3:', error_ab3)
+    print('Error in AM3:', error_am3)
     
     
     #Now we will plot the approximations on the same graph, together with the exact solution
-    figure('Comparación métodos para N = 40')
+    figure('Comparison of methods for N = 40')
     
-    plot(t_ab2,y_exacta,'k-', label = 'Solución exacta')
+    plot(t_ab2,y_exacta,'k-', label = 'Exact solution')
     plot(t_ab2,y_ab2, 'o--', label = 'AB2')
     plot(t_ab3,y_ab3, 's--', label = 'AB3')
     plot(t_am3,y_am3, '^--', label = 'AM3')
@@ -155,7 +155,7 @@ def experimento_mallado_fijo40():
     xlabel('t')
     ylabel('y(t)')
     legend()
-    title('Comparación métodos para N = 40')
+    title('Comparison of methods for N = 40')
     grid(True)
     show()
 
@@ -177,16 +177,16 @@ def experimento_varios_mallados(metodo, nombre_metodo):
     y0 = 0 #this will be the initial value we take
     mallados = [10,20,40,80,160,320]
     
-    print('Errores para', nombre_metodo)
+    print('Errors for', nombre_metodo)
     
-    figure('Comparación variando N - ' + nombre_metodo)
+    figure('Comparison varying N - ' + nombre_metodo)
     for N in mallados:
         (t_metodo, y_metodo) = metodo(a,b,fun,N,y0)
         y_exacta = exacta(t_metodo)
         
         error = max(abs(y_exacta-y_metodo))
         
-        print('Para N =', N, 'el error es', error)
+        print('For N =', N, 'the error is', error)
     
         #Now we will build the plot where this can be seen visually:
         plot(t_metodo,y_metodo, 'o--', label = 'N='+str(N))
@@ -194,11 +194,11 @@ def experimento_varios_mallados(metodo, nombre_metodo):
     #we plot the exact solution too
     t_exacta = linspace(a,b,1000)
     y_exacta = exacta(t_exacta)
-    plot(t_exacta,y_exacta,'k-', label = 'exacta')
+    plot(t_exacta,y_exacta,'k-', label = 'exact')
     
     xlabel('t')
     ylabel('y(t)')
-    title('Aproximaciones de ' + nombre_metodo +' para varios mallados')
+    title('Approximations of ' + nombre_metodo +' for several meshes')
     legend()
     grid(True)
     show()
@@ -223,8 +223,8 @@ def experimento_ordenes_de_convergencia(metodo,nombre_metodo):
     y0 = 0 #this will be the initial value we take
     mallados = [10,20,40,80,160,320]
     
-    print('Los órdenes de convergencia aproximado del método', nombre_metodo,'son:')
-    print('El orden del primer mallado N = 10 no lo podemos calcular dado que necesitamos otro error para compararlo')
+    print('The approximate orders of convergence of the method', nombre_metodo,'are:')
+    print('The order for the first mesh N = 10 cannot be computed since we need another error to compare it with')
     
     errores=[]
     for N in mallados:
@@ -238,7 +238,7 @@ def experimento_ordenes_de_convergencia(metodo,nombre_metodo):
         
     for i in range(1,len(mallados)):
         orden = log(errores[i-1]/errores[i])/log(2)
-        print('Para N=', mallados[i],'el orden aproximado es:',orden)
+        print('For N=', mallados[i],'the approximate order is:',orden)
 
 
 experimento_ordenes_de_convergencia(adams_bashforth2, "AB2")
